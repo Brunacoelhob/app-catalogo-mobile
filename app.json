@@ -1,30 +1,30 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
-
-// Importação das telas
-import LoginScreen from '../screens/LoginScreen';
-import HomeScreen from '../screens/HomeScreen';
-import ProductDetailScreen from '../screens/ProductDetailScreen';
-
-const Stack = createStackNavigator();
-
-export default function AppNavigator() {
-  // O Navigator observa o estado de login no Redux
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {isLoggedIn ? (
-        // Se estiver logado, estas telas ficam acessíveis
-        <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={ProductDetailScreen} />
-        </>
-      ) : (
-        // Se não estiver logado, apenas o Login fica acessível
-        <Stack.Screen name="Login" component={LoginScreen} />
-      )}
-    </Stack.Navigator>
-  );
+{
+  "expo": {
+    "name": "Catálogo Mobile",
+    "slug": "catalogo-mobile",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
 }

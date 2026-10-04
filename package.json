@@ -1,41 +1,50 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Button } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import { logout } from '../store/authSlice';
-import ProductListScreen from './ProductListScreen';
-
-const Tab = createBottomTabNavigator();
-
-export default function HomeScreen() {
-  const dispatch = useDispatch();
-
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: '#6200ee',
-        headerRight: () => (
-          <Button onPress={() => dispatch(logout())} color="red">Sair</Button>
-        ),
-      }}
-    >
-      <Tab.Screen 
-        name="Masculino" 
-        component={ProductListScreen} 
-        initialParams={{ category: 'mens-shirts' }} // Categoria da API
-        options={{
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account" color={color} size={26} />,
-        }}
-      />
-      <Tab.Screen 
-        name="Feminino" 
-        component={ProductListScreen} 
-        initialParams={{ category: 'womens-dresses' }} // Outra categoria da API
-        options={{
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account-outline" color={color} size={26} />,
-        }}
-      />
-    </Tab.Navigator>
-  );
+{
+  "name": "catalogo-mobile",
+  "version": "2.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^15.0.2",
+    "@react-navigation/bottom-tabs": "^7.20.0",
+    "@react-navigation/native": "^7.5.0",
+    "@react-navigation/stack": "^7.12.0",
+    "@reduxjs/toolkit": "^2.13.0",
+    "axios": "^1.20.0",
+    "expo": "~57.0.26",
+    "expo-secure-store": "~57.0.4",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-gesture-handler": "~2.32.0",
+    "react-native-paper": "^5.15.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-redux": "^9.3.0"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^13.0.0",
+    "jest": "^29.7.0",
+    "jest-expo": "~57.0.0",
+    "react-test-renderer": "19.2.3"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg|@reduxjs/toolkit|react-redux|redux|redux-thunk|immer|reselect)"
+    ]
+  }
 }

@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'melhoria/**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test -- --ci
+      - name: O app empacota (acusa imports quebrados)
+        run: npx expo export --platform android
+        env:
+          CI: '1'
